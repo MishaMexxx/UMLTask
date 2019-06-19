@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBClient", "DBClient\DBClient.csproj", "{FC825BC4-A79F-496C-A941-6B25A8D38C81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F828F9C3-D65A-4EA3-BBB0-565508749504} = {F828F9C3-D65A-4EA3-BBB0-565508749504}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseFrame", "BaseFrame\BaseFrame\BaseFrame.csproj", "{F828F9C3-D65A-4EA3-BBB0-565508749504}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC825BC4-A79F-496C-A941-6B25A8D38C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC825BC4-A79F-496C-A941-6B25A8D38C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC825BC4-A79F-496C-A941-6B25A8D38C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC825BC4-A79F-496C-A941-6B25A8D38C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F828F9C3-D65A-4EA3-BBB0-565508749504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F828F9C3-D65A-4EA3-BBB0-565508749504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F828F9C3-D65A-4EA3-BBB0-565508749504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F828F9C3-D65A-4EA3-BBB0-565508749504}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD672BCD-5568-4497-BF15-22D01E69EFF9}
+	EndGlobalSection
+EndGlobal
