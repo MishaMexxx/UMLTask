@@ -1,0 +1,357 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DBClient"
+					xmlns:styleconv="clr-namespace:DBClient.Converters.StyleConverter">
+
+	<!--#region For Hidden And Collapse panel with inputdata-->
+	<Style x:Key="HiddenStackPanelTriggers" TargetType="StackPanel">
+		<Style.Triggers>
+			<Trigger Property="IsEnabled" Value="True">
+				<Setter Property="Height" Value="Auto" />
+			</Trigger>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Height" Value="0" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+	<!--#endregion-->		
+
+	<!--#region Other label, textbox and control styles-->
+	<Style x:Key="BaseTextColorStyle" TargetType="Control">
+		<Setter Property="Foreground" Value="#992026" />
+	</Style>
+
+	<Style x:Key="BaseTextElementStyle" TargetType="Control" BasedOn="{StaticResource BaseTextColorStyle}">
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="FontSize" Value="15" />
+		<Setter Property="Width" Value="150" />
+		<Setter Property="Height" Value="Auto" />
+	</Style>
+
+	<Style x:Key="BaseInputBoxStyle" TargetType="Control" BasedOn="{StaticResource BaseTextElementStyle}">
+		<Setter Property="FontSize" Value="15" />
+		<Setter Property="Width" Value="260" />
+		<Setter Property="Height" Value="20" />
+		<Setter Property="BorderThickness" Value="0" />
+	</Style>
+
+	<Style TargetType="Label" BasedOn="{StaticResource BaseTextElementStyle}">
+		<Setter Property="FontSize" Value="20" />
+	</Style>
+
+	<Style x:Key="BorderAuth" TargetType="Border">
+		<Setter Property="CornerRadius" Value="2" />
+		<Setter Property="BorderBrush" Value="#992026" />
+		<Setter Property="BorderThickness" Value="0.6" />
+		<Setter Property="Height" Value="23" />
+		<Setter Property="Width" Value="265" />
+		<Setter Property="Background" Value="White" />
+	</Style>
+
+	<Style x:Key="TextBoxAuthStyle" TargetType="TextBox" BasedOn="{StaticResource BaseInputBoxStyle}">
+		<Style.Setters>
+			<Setter Property="MaxLength" Value="30" />
+			<Setter Property="AcceptsTab" Value="False" />
+			<Setter Property="AcceptsReturn" Value="False" />
+		</Style.Setters>
+		<Style.Triggers>
+			<Trigger Property="Validation.HasError" Value="True">
+				<Setter Property="ToolTip"
+				       Value="{Binding RelativeSource={RelativeSource Self},
+						Path=(Validation.Errors)[0].ErrorContent}" />
+				<Setter Property="Foreground" Value="Red" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="PasswordBoxAuthStyle" TargetType="PasswordBox"  BasedOn="{StaticResource BaseInputBoxStyle}">
+		<Style.Setters>
+			<Setter Property="MaxLength" Value="25" />
+		</Style.Setters>
+		<Style.Triggers>
+			<Trigger Property="Validation.HasError" Value="True">
+				<Setter Property="ToolTip"
+				       Value="{Binding RelativeSource={RelativeSource Self},
+						Path=(Validation.Errors)[0].ErrorContent}" />
+				<Setter Property="Foreground" Value="Red" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="LabelButtonAuth" TargetType="Label" BasedOn="{StaticResource BaseTextElementStyle}">
+		<Style.Setters>
+			<Setter Property="Background" Value="#F7F0A9" />
+		</Style.Setters>
+
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#EFE365" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#F7F0A9" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="LabelRegistrationStyle" TargetType="Label" BasedOn="{StaticResource BaseTextElementStyle}">
+		<Style.Setters>
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="Foreground" Value="LightGray" />
+		</Style.Setters>
+
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="DarkGray" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="LightGray" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="LabelSelectStyle" TargetType="Label" BasedOn="{StaticResource LabelButtonAuth}">
+		<Style.Setters>
+			<Setter Property="Margin" Value="0 1" />
+			<Setter Property="Foreground" Value="#111111" />
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="Width" Value="210" />
+		</Style.Setters>
+
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#992026" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="White" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="Transparent" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#111111" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="LabelSaveButtonStyle" TargetType="Label">
+		<Style.Setters>
+			<Setter Property="Width" Value="200" />
+			<Setter Property="Background" Value="#FFCBB3" />
+			<Setter Property="FontSize" Value="15" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+		</Style.Setters>
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#FFA983" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#FFCBB3" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+	
+	<Style TargetType="ProgressBar">
+		<Setter Property="Height" Value="5"/>
+		<Setter Property="Background" Value="White"/>
+		<Setter Property="Foreground" Value="#9B2A21"/>
+		<Setter Property="IsIndeterminate" Value="True"/>
+		<Setter Property="BorderThickness" Value="0"/>
+	</Style>
+
+	<Style x:Key="LabelDataInputHelper" TargetType="Label" BasedOn="{StaticResource BaseTextElementStyle}">
+		<Setter Property="FontSize" Value="15" />
+		<Setter Property="Width" Value="Auto" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+	</Style>
+
+	<Style TargetType="ComboBox" BasedOn="{StaticResource BaseTextColorStyle}">
+		<Setter Property="Width" Value="300" />
+		<Setter Property="Background" Value="White"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+	</Style>
+	<!--#endregion-->
+
+	<!--#region DataGrid and DataGridColumnHeader Style-->
+	<Style TargetType="{x:Type DataGrid}">
+		<Setter Property="Background" Value="#FFFBF9"/>
+		<Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Width" Value="Auto" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+		<Setter Property="ColumnWidth" Value="*" />
+		<Setter Property="AutoGenerateColumns" Value="False" />
+		<Setter Property="Margin" Value="10 0 10 10" />
+		<Setter Property="RowHeaderWidth" Value="0" />
+		<Setter Property="IsReadOnly" Value="True" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<!--<Setter Property="Height" Value="Auto" />-->
+	</Style>
+
+	<Style TargetType="{x:Type DataGridColumnHeader}">
+		<Setter Property="Background" Value="#A62F00"/>
+		<Setter Property="BorderBrush" Value="#61280E" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="Foreground" Value="#FFF0E9" />
+		<Setter Property="Padding" Value="3" />
+		<Setter Property="FontSize" Value="15" />
+	</Style>
+
+	<Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource BaseTextColorStyle}">
+		<Style.Setters>
+			<Setter Property="FontSize" Value="15" />
+			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+			<Setter Property="Background" Value="White"/>
+		</Style.Setters>
+
+	</Style>
+
+	<Style TargetType="DataGridCell" BasedOn="{StaticResource BaseTextColorStyle}">
+		<Style.Setters>
+			<Setter Property="FontSize" Value="15" />
+			<Setter Property="HorizontalContentAlignment" Value="Right" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+			<Setter Property="TextBlock.TextAlignment" Value="Left" />
+		</Style.Setters>
+		<Style.Triggers>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="#FEA690"/>
+				<Setter Property="Foreground" Value="White"/>
+				<Setter Property="BorderBrush" Value="Brown" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<!--#endregion-->
+
+	<!--#region Add and Clear LabelButtons-->
+	<Style x:Key="BaseLabelClearAddButtonStyle" TargetType="Label">
+		<Setter Property="FontSize" Value="15" />
+		<Setter Property="Foreground" Value="#A7623D" />
+	</Style>
+
+	<Style x:Key="LabelAddButtonStyle" TargetType="Label" BasedOn="{StaticResource BaseLabelClearAddButtonStyle}">
+		<Style.Setters>
+			<Setter Property="Background" Value="#F6E1D4" />
+		</Style.Setters>
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#CEA88F" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="White" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color" To="#F6E1D4" />
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#A7623D" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="LabelClearButtonStyle" TargetType="Label" BasedOn="{StaticResource BaseLabelClearAddButtonStyle}">
+		<Style.Setters>
+			<Setter Property="Background" Value="Transparent" />
+		</Style.Setters>
+		<Style.Triggers>
+			<EventTrigger RoutedEvent="MouseEnter">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="Brown" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+			<EventTrigger RoutedEvent="MouseLeave">
+				<EventTrigger.Actions>
+					<BeginStoryboard>
+						<Storyboard>
+							<ColorAnimation Duration="0:0:0.1" Storyboard.TargetProperty="Foreground.Color" To="#A7623D" />
+						</Storyboard>
+					</BeginStoryboard>
+				</EventTrigger.Actions>
+			</EventTrigger>
+		</Style.Triggers>
+	</Style>
+	<!--#endregion-->
+
+	<!--#region Converters-->
+	<styleconv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+	<styleconv:MenuToTableConverter x:Key="MenuToTableConv" />
+	<styleconv:AccessToVisibilityConverter x:Key="AccessToVisibilityConv" />
+	<styleconv:AccessToIndexConverter x:Key="AccessToIndexConv"/>
+	<styleconv:AccessToBoolEnabledConverter x:Key="AccessToBoolEnabledConv" />
+	<styleconv:BoolNotConvertor x:Key="BoolNotConv"/>
+	<!--#endregion-->
+
+	<!--#region Validation-->
+	<ControlTemplate x:Key="validationFailed">
+		<StackPanel>
+			<Border BorderBrush="Red" BorderThickness="2" >
+				<AdornedElementPlaceholder />
+			</Border>
+		</StackPanel>
+	</ControlTemplate>
+	<!--#endregion -->
+
+</ResourceDictionary>
